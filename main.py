@@ -15,16 +15,17 @@ def main():
     running = True
     while running:  # главный игровой цикл
         # цикл обработки событий
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+            if event.type == pygame.MOUSEMOTION:
+                coords_mouse = event.pos
+                print(coords_mouse)
+                screen.fill((0, 0, 0))
+                draw_circle(screen, coords_mouse)
             # обработка остальных событий
         # отрисовка изменений
-
-        screen.fill((0, 0, 0))
-        draw_circle(screen, (x, y))
-        x += v
-
         pygame.display.flip()
     pygame.quit()
 
