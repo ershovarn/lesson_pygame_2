@@ -12,6 +12,7 @@ def main():
     screen = pygame.display.set_mode(size)
     x, y = 0, height // 2
     v = 20
+    do_paint = False
     running = True
     while running:  # главный игровой цикл
         # цикл обработки событий
@@ -19,11 +20,15 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-            if event.type == pygame.MOUSEMOTION:
+            if event.type == pygame.MOUSEMOTION and do_paint:
                 coords_mouse = event.pos
-                print(coords_mouse)
-                screen.fill((0, 0, 0))
+                # print(coords_mouse)
+                # screen.fill((0, 0, 0))
                 draw_circle(screen, coords_mouse)
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                do_paint = True
+            if event.type == pygame.MOUSEBUTTONUP:
+                do_paint = False
             # обработка остальных событий
         # отрисовка изменений
         pygame.display.flip()
